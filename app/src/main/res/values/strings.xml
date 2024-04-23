@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">social_media</string>
+
+    <string name="default_web_client_id">266373841220-6u62uf11vtpbckvh7r6drughb4u3e0de.apps.googleusercontent.com
+</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>

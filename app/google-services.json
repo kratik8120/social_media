@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "266373841220",
+    "firebase_url": "https://chatclone-1674a-default-rtdb.firebaseio.com",
+    "project_id": "chatclone-1674a",
+    "storage_bucket": "chatclone-1674a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:266373841220:android:c9fa72091676b1bbd79711",
+        "android_client_info": {
+          "package_name": "com.example.social_media"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBN-CWWzjjDljVTdtLhHslTLMOceko4Wvw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".sample_show_result">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/circlepic"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        app:civ_border_width="2dp"
+        android:src="@drawable/baseline_person_24"
+        android:layout_marginLeft="5dp"
+        android:padding="5dp"
+        app:civ_circle_background_color="@color/white" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/picname"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="name"
+            android:paddingTop="5dp"
+            android:layout_marginLeft="2dp"
+
+            android:paddingBottom="5dp"
+            android:textStyle="bold"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/piclastmessage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="last message"
+            android:paddingTop="2dp"
+android:layout_marginLeft="2dp"
+            android:paddingBottom="2dp"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+</LinearLayout>
