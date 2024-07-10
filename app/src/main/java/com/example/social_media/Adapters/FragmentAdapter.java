@@ -10,6 +10,9 @@ import com.example.social_media.Fragment.CallFragment;
 import com.example.social_media.Fragment.ChatsFragment;
 import com.example.social_media.Fragment.StatusFragment;
 
+// here we have use the fragmentpageradapter because it ensures that
+// fragments are correctly created,
+// destroyed, and managed as the user swipes between pages
 public class FragmentAdapter extends FragmentPagerAdapter {
     public FragmentAdapter(@NonNull FragmentManager fm) {
         super(fm);
@@ -32,12 +35,14 @@ public class FragmentAdapter extends FragmentPagerAdapter {
     }
 
     @Override
+    // return 3 because there are 3 fragments
     public int getCount() {
         return 3;
     }
 
     @Nullable
     @Override
+    // this is basically used to give the page title
     public CharSequence getPageTitle(int position) {
 
         String title=null;

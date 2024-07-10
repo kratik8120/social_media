@@ -126,13 +126,10 @@ public class signin extends AppCompatActivity {
             finish();
         }
     }
-
-    private void googleclick() {
-
+    // this is for the google authentication
+    private void googleclick(){
         Intent signInIntent=mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent,1000);
-
-
     }
         @Override
         protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -144,7 +141,7 @@ public class signin extends AppCompatActivity {
                 try
                 {
                     GoogleSignInAccount account =task.getResult(ApiException.class);
-                    Log.w(TAG, "Google sign in failed"+account.getId());
+                    Log.w(TAG, "Google sign in successful"+account.getId());
                     firebaseauthwithGoogle(account.getIdToken());
                 } catch (ApiException e)
                 {
@@ -162,22 +159,20 @@ public class signin extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        if (task.isSuccessful())
-                        {
-                            FirebaseUser firebaseuser =auth.getCurrentUser();
+                        if (task.isSuccessful()) {
+                            FirebaseUser firebaseuser = auth.getCurrentUser();
 
                             // now we will take the user mail,username and profile pic
-                            Users users=new Users();
+                            Users users = new Users();
                             users.setUserid(firebaseuser.getUid());
                             users.setUsername(firebaseuser.getDisplayName());
-                            users.getProfileimg(firebaseuser.getPhotoUrl().toString());
+                            users.setProfileimg(firebaseuser.getPhotoUrl().toString());
                             database.getReference().child("Users").child(firebaseuser.getUid()).setValue(users);
 
-                            Intent i=new Intent(signin.this, MainActivity.class);
+                            Intent i = new Intent(signin.this, MainActivity.class);
                             startActivity(i);
                             finish();
-                        }
-                        else {
+                        } else {
                             Toast.makeText(signin.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }

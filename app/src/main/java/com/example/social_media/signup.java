@@ -30,8 +30,8 @@ FirebaseDatabase database;
 
 // this is used to add the progress dialog
     // this means we are showing the progress bar in the progress dialog
-   ProgressDialog progressDialog;
-@Override
+//   ProgressDialog progressDialog;
+   @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding=ActivitySignupBinding.inflate(getLayoutInflater());
@@ -40,9 +40,9 @@ FirebaseDatabase database;
         auth=FirebaseAuth.getInstance();
         database=FirebaseDatabase.getInstance();
 
-        progressDialog=new ProgressDialog(signup.this);
-        progressDialog.setTitle("creating account");
-        progressDialog.setMessage("we are creating your account");
+//        progressDialog=new ProgressDialog(signup.this);
+//        progressDialog.setTitle("creating account");
+//        progressDialog.setMessage("we are creating your account");
 
         // in this first the signup button will get clicked
         // after that it will check for the email and pass
@@ -50,38 +50,51 @@ FirebaseDatabase database;
         // whether the exception is present or not , it is checked by the Authresult
         // which is present in the parameter of the oncomplete fun
 
+       // basically in signup what we do
+       //we basically enter the details and it get store in the database
+       // and in signin we check whether the users have enter the details correctly or not
         binding.signupbt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // we want the progress when we click on the signup btn
-                progressDialog.show();
+//                progressDialog.show();
                 auth.createUserWithEmailAndPassword(binding.emailtext.getText().toString(),binding.passtext.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         // close the progress when the user acc is created
-                        progressDialog.dismiss();
-                        if(task.isSuccessful())
-                        {
+//                        progressDialog.dismiss();
+                        if (task.isSuccessful()) {
                             // now as the user will enter the name,mail,pass we will store it in the realtime database
-                            Users users=new Users(binding.nametext.getText().toString(),binding.emailtext.getText().toString(),binding.passtext.getText().toString());
+                            // the parameter inside it is same as we have make the signup xml
+                            Users user = new Users(binding.nametext.getText().toString(), binding.emailtext.getText().toString(), binding.passtext.getText().toString());
 
                             // now we will get the id
                             // by this we can uniquely identified the users
-                            String id=task.getResult().getUser().getUid();
+                            String id = task.getResult().getUser().getUid();
 
                             // this basically means that we have created a child name Users under which their is a subchild
                             //name id and this id is unique for ever users as users enter their detail new id will be generetaed
                             // and under that unique id we have store the value of the obj users and it include
                             // username,mail,pass
-                            database.getReference().child("Users").child(id).setValue(users);
-                            Toast.makeText(signup.this, "user created successfully", Toast.LENGTH_SHORT).show();
+                            database.getReference().child("Users").child(id).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(signup.this, "User created successfully", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(signup.this, MainActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    } else {
+                                        Toast.makeText(signup.this, "Failed to store user data: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                            });
+                        } else {
+                            Toast.makeText(signup.this, "Failed to create user: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }
 
-                        else
-                        {
-                            Toast.makeText(signup.this,task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
                     }
                 });
 

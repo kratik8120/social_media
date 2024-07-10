@@ -18,7 +18,6 @@ import com.example.social_media.databinding.ActivityMainBinding;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
-
     ActivityMainBinding binding;
     FirebaseAuth auth;
 
@@ -32,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
 
-        //viewpager me fragments ko slides krwane ke liye we make adapter
+        //viewpager me fragments ko slides/switch krwane ke liye we make adapter
+        // view pager ke upper apn adapter set krwa denge jiska name hai FragmentAdapter
         binding.viewpager.setAdapter(new FragmentAdapter(getSupportFragmentManager()));
 
         // set tablayout with viewpager
@@ -70,6 +70,12 @@ public class MainActivity extends AppCompatActivity {
            startActivity(i);
            finish();
        }
+       if(id==R.id.groupChat)
+        {
+            Intent i=new Intent(MainActivity.this, GroupChatActivity.class);
+            startActivity(i);
+            finish();
+        }
         return true;
     }
 }
